@@ -11,13 +11,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import PostsList from '~/components/PostsList'
 
 export default {
   name: 'HomePage',
   components: { PostsList },
-  data () {
-    return { posts: [] }
+  async fetch () {
+    await this.$store.dispatch('loadPosts')
+  },
+  computed: {
+    ...mapGetters({ posts: 'getPosts' })
   }
 }
 </script>
