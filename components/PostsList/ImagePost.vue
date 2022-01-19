@@ -1,7 +1,12 @@
 <template>
   <li class="post">
     <div class="wrapper">
-      <img class="image" :src="url" :alt="title">
+      <component
+        :is="mediaComponent(mediaType)"
+        class="media"
+        :class="mediaComponent(mediaType)"
+        v-bind="mediaProps(mediaType)"
+      ></component>
     </div>
 
     <div class="container">
@@ -35,6 +40,10 @@ export default {
       type: String,
       required: true
     },
+    mediaType: {
+      type: String,
+      required: true
+    },
     title: {
       type: String,
       default: 'Missing Title'
@@ -59,6 +68,26 @@ export default {
     }
   },
   methods: {
+    mediaComponent (mediaType) {
+      switch (mediaType) {
+        case 'image':
+          return 'img'
+        case 'video':
+          return 'iframe'
+        default:
+          return 'div'
+      }
+    },
+    mediaProps (mediaType) {
+      switch (mediaType) {
+        case 'image':
+          return { src: this.url, alt: this.title }
+        case 'video':
+          return { src: this.url, title: this.title }
+        default:
+          return {}
+      }
+    },
     toggleLike (like) {
       this.liked = !like
     },
@@ -85,8 +114,28 @@ export default {
   .wrapper
     display: flex
 
-    .image
+    .media
       width: 100%
+      border: none
+
+      &.iframe,
+      &.div
+        height: 230px
+
+        @media #{$tablets-up}
+          height: 510px
+
+        @media #{$medium-up}
+          height: 770px
+
+      &.div
+        background-color: #222
+        display: flex
+        justify-content: center
+        align-items: center
+
+        &:before
+          content: 'Invalid Media Type'
 
   .container
     .header

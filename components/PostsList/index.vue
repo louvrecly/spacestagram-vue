@@ -5,6 +5,7 @@
       :key="idx"
       class="post"
       :url="post.url"
+      :media-type="post.media_type"
       :title="post.title"
       :date="post.date"
       :explanation="post.explanation"
