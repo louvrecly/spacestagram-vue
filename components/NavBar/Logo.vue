@@ -1,5 +1,5 @@
 <template>
-  <h1 class="logo text-bold">
+  <h1 class="logo">
     <span class="icon">&#129680;</span><span class="title">spacestagram</span>
   </h1>
 </template>
