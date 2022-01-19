@@ -5,36 +5,61 @@
     </div>
 
     <div class="container">
-      <div class="info">
-        <h3 class="title">{{ title }}</h3>
+      <div class="header">
+        <div class="info">
+          <h3 class="title">{{ title }}</h3>
 
-        <p class="date">{{ date }}</p>
+          <p class="date">{{ date }}</p>
+        </div>
+
+        <like-button class="button" :liked="liked" @toggleLike="toggleLike"></like-button>
       </div>
 
-      <p class="explanation text-small">{{ explanation }}</p>
+      <div class="body text-small">
+        <p class="explanation">{{ explanation }}</p>
+
+        <p v-if="copyright" class="copyright text-italic">&#169; {{ copyright }}</p>
+      </div>
     </div>
   </li>
 </template>
 
 <script>
+import LikeButton from '~/components/LikeButton'
+
 export default {
   name: 'ImagePost',
+  components: { LikeButton },
   props: {
+    url: {
+      type: String,
+      required: true
+    },
     title: {
       type: String,
       default: 'Missing Title'
+    },
+    date: {
+      type: String,
+      default: 'Date Unknown'
     },
     explanation: {
       type: String,
       default: 'Missing Explanation'
     },
-    url: {
+    copyright: {
       type: String,
-      required: true
-    },
-    date: {
-      type: String,
-      default: 'Date Unknown'
+      default: ''
+    }
+  },
+  data () {
+    return {
+      liked: false
+    }
+  },
+  methods: {
+    toggleLike (like) {
+      this.liked = !like
     }
   }
 }
@@ -53,26 +78,32 @@ export default {
       width: 100%
 
   .container
-    .info
+    .header
       padding: 20px 0
+      display: flex
+      justify-content: space-between
+      align-items: center
 
-      @media #{$tablets-up}
-        display: flex
-        justify-content: space-between
-        align-items: center
+      .info
+        margin: 0 10px 0 0
+        flex: 1
 
-      .title
-        +font-size-small
+        .title
+          +font-size-small
 
-        @media #{$tablets-up}
-          +font-size-normal
+          @media #{$tablets-up}
+            +font-size-normal
 
-      .date
-        +font-size-smaller
+        .date
+          color: rgba(gold, 0.7)
+          +font-size-smaller
 
-        @media #{$tablets-up}
-          +font-size-normal
-
-    .explanation
+    .body
       color: rgba(gold, 0.7)
+
+      .explanation
+        margin: 0 0 20px
+
+      .copyright
+        text-align: right
 </style>
