@@ -2,6 +2,10 @@
   <div class="nav-bar" :class="{ solid: !isOnTop }">
     <div class="container responsive-margins">
       <app-logo></app-logo>
+
+      <button class="button icon-button">
+        <font-awesome-icon :icon="['fas', 'bars']"></font-awesome-icon>
+      </button>
     </div>
   </div>
 </template>
@@ -51,6 +55,9 @@ export default {
 
   .container
     padding: 15px 0 20px
+    display: flex
+    justify-content: space-between
+    align-items: flex-end
     transition: padding .3s ease
 
     @media #{$tablets-up}
