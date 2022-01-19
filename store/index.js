@@ -13,7 +13,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async loadPosts ({ commit }, startDate = '2022-01-01') {
+  async loadPosts ({ commit }, startDate) {
     const posts = await this.$axios.$get('/planetary/apod', {
       params: { api_key: process.env.NASA_API_KEY, start_date: startDate }
     })
