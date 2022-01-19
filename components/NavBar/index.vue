@@ -1,9 +1,11 @@
 <template>
   <div class="nav-bar" :class="{ solid: !isOnTop }">
+    <modal-base v-if="modalOpened" @close="toggleModalOpened(false)"></modal-base>
+
     <div class="container responsive-margins">
       <app-logo></app-logo>
 
-      <button class="button icon-button">
+      <button class="button icon-button" @click="toggleModalOpened(true)">
         <font-awesome-icon :icon="['fas', 'bars']"></font-awesome-icon>
       </button>
     </div>
@@ -21,12 +23,16 @@ export default {
   mixins: [scrollHandler],
   data () {
     return {
-      isOnTop: true
+      isOnTop: true,
+      modalOpened: false
     }
   },
   methods: {
     handleScroll () {
       this.isOnTop = (window.scrollY || window.pageYOffset) <= 40
+    },
+    toggleModalOpened (opened) {
+      this.modalOpened = opened
     }
   }
 }
@@ -57,7 +63,7 @@ export default {
     padding: 15px 0 20px
     display: flex
     justify-content: space-between
-    align-items: flex-end
+    align-items: center
     transition: padding .3s ease
 
     @media #{$tablets-up}
