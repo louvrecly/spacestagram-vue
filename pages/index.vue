@@ -1,7 +1,10 @@
 <template>
   <div class="home">
     <section class="container responsive-margins">
-      <h1 class="title text-bold">&#129680;&nbsp;spacestagram</h1>
+      <h1 class="title text-bold">
+        <span class="icon">&#129680;</span>
+        <span class="text">spacestagram</span>
+      </h1>
 
       <posts-list :posts="posts"></posts-list>
     </section>
@@ -35,7 +38,7 @@ export default {
 @import ~assets/css/components/section
 
 .home
-  background-color: #1D1D1D
+  background-image: linear-gradient(90deg, #151515 0%, #1D1D1D 10%, #1D1D1D 90%, #151515 100%)
 
   .container
     padding: 50px 0
@@ -46,10 +49,21 @@ export default {
     .title
       margin: 0 0 30px
       color: goldenrod
-      +font-size-large
       font-family: $font-family-logo
 
       @media #{$tablets-up}
         margin: 0 0 50px
-        +font-size-larger
+
+      .icon
+        margin: 0 5px 0 0
+        +font-size-normal
+
+        @media #{$tablets-up}
+          +font-size-large
+
+      .text
+        +font-size-large
+
+        @media #{$tablets-up}
+          +font-size-larger
 </style>
