@@ -1,6 +1,8 @@
 <template>
   <div class="nav-bar" :class="{ solid: !isOnTop }">
-    <modal-base v-if="modalOpened" @close="toggleModalOpened(false)"></modal-base>
+    <modal-base v-if="modalOpened" @close="toggleModalOpened(false)">
+      filter
+    </modal-base>
 
     <div class="container responsive-margins">
       <app-logo></app-logo>
@@ -17,9 +19,14 @@ import AppLogo from './Logo'
 
 import scrollHandler from '~/components/mixins/scrollHandler'
 
+const ModalBase = () => import('~/components/ModalBase')
+
 export default {
   name: 'NavBar',
-  components: { AppLogo },
+  components: {
+    AppLogo,
+    ModalBase
+  },
   mixins: [scrollHandler],
   data () {
     return {
