@@ -33,7 +33,7 @@ export default {
 @import ~assets/css/components/section
 
 .home
-  background-color: black
+  background-color: #111
 
   .container
     padding: 50px 0
