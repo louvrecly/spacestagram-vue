@@ -37,6 +37,7 @@ export default {
   color: silver
   +font-size-normal
   line-height: 1em
+  border-radius: 8px
   cursor: pointer
   transition: transform .3s ease
 
