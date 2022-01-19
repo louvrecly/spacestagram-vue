@@ -1,9 +1,7 @@
 <template>
   <div class="home">
     <section class="container responsive-margins">
-      <h1 class="title">
-        &#129680;&nbsp;<span class="text-italic">space</span>stagram
-      </h1>
+      <h1 class="title text-bold">&#129680;&nbsp;spacestagram</h1>
 
       <posts-list :posts="posts"></posts-list>
     </section>
@@ -33,7 +31,7 @@ export default {
 @import ~assets/css/components/section
 
 .home
-  background-color: #111
+  background-color: #1D1D1D
 
   .container
     padding: 50px 0
@@ -45,6 +43,7 @@ export default {
       margin: 0 0 30px
       color: goldenrod
       +font-size-large
+      font-family: $font-family-logo
 
       @media #{$tablets-up}
         margin: 0 0 50px
