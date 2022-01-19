@@ -1,19 +1,19 @@
 <template>
   <div class="nav-bar" :class="{ solid: !isOnTop }">
     <div class="container responsive-margins">
-      <h1 class="title text-bold">
-        <span class="icon">&#129680;</span>
-        <span class="text">spacestagram</span>
-      </h1>
+      <app-logo></app-logo>
     </div>
   </div>
 </template>
 
 <script>
+import AppLogo from './Logo'
+
 import scrollHandler from '~/components/mixins/scrollHandler'
 
 export default {
   name: 'NavBar',
+  components: { AppLogo },
   mixins: [scrollHandler],
   data () {
     return {
@@ -55,21 +55,4 @@ export default {
 
     @media #{$tablets-up}
       padding: 20px 0 25px
-
-    .title
-      color: goldenrod
-      font-family: $font-family-logo
-
-      .icon
-        margin: 0 5px 0 0
-        +font-size-normal
-
-        @media #{$tablets-up}
-          +font-size-large
-
-      .text
-        +font-size-large
-
-        @media #{$tablets-up}
-          +font-size-larger
 </style>
