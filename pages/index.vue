@@ -13,11 +13,15 @@ import { mapGetters } from 'vuex'
 
 import PostsList from '~/components/PostsList'
 
+import { validateStartDate } from '~/utils/nasaHelper'
+
 export default {
   name: 'HomePage',
   components: { PostsList },
-  async fetch () {
-    await this.$store.dispatch('loadPosts')
+  async asyncData ({ store, route: { query } }) {
+    const { start_date } = query // eslint-disable-line camelcase
+    const validStartDate = validateStartDate(start_date)
+    await store.dispatch('loadPosts', validStartDate)
   },
   computed: {
     ...mapGetters({ posts: 'getPosts' })
