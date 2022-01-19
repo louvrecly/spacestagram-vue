@@ -2,7 +2,7 @@
   <div class="home">
     <section class="container responsive-margins">
       <h1 class="title">
-        <i>spaces</i>tagram &#129680;
+        &#129680;&nbsp;<span class="text-italic">space</span>stagram
       </h1>
 
       <posts-list :posts="posts"></posts-list>
