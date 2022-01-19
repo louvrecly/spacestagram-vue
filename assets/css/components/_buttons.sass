@@ -1,0 +1,18 @@
+@import ~assets/css/utils/media
+
+.icon-button
+  padding: 5px
+  background-color: transparent
+  border: none
+  color: silver
+  +font-size-normal
+  line-height: 1em
+  border-radius: 8px
+  cursor: pointer
+  transition: transform .3s ease
+
+  @media #{$tablets-up}
+    padding: 10px
+
+  &:hover
+    transform: scale(1.2)
