@@ -16,7 +16,7 @@
       </div>
 
       <div class="body text-small">
-        <p class="explanation">{{ explanation }}</p>
+        <p class="explanation" :class="{ collapsed }" @click="toggleCollapsed">{{ explanation }}</p>
 
         <p v-if="copyright" class="copyright text-italic">&#169; {{ copyright }}</p>
       </div>
@@ -54,12 +54,16 @@ export default {
   },
   data () {
     return {
-      liked: false
+      liked: false,
+      collapsed: true
     }
   },
   methods: {
     toggleLike (like) {
       this.liked = !like
+    },
+    toggleCollapsed () {
+      this.collapsed = !this.collapsed
     }
   }
 }
@@ -95,14 +99,22 @@ export default {
             +font-size-normal
 
         .date
-          color: rgba(gold, 0.7)
+          color: rgba(gold, 0.6)
           +font-size-smaller
 
     .body
-      color: rgba(gold, 0.7)
+      color: rgba(gold, 0.6)
 
       .explanation
         margin: 0 0 20px
+        overflow: hidden
+        transition: all .3s ease
+
+        &.collapsed
+          display: -webkit-box
+          -webkit-line-clamp: 2
+          -webkit-box-orient: vertical
+          cursor: pointer
 
       .copyright
         text-align: right
