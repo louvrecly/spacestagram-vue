@@ -4,10 +4,11 @@
       v-for="(post, idx) in posts"
       :key="idx"
       class="post"
-      :title="post.title"
-      :explanation="post.explanation"
       :url="post.url"
+      :title="post.title"
       :date="post.date"
+      :explanation="post.explanation"
+      :copyright="post.copyright"
     ></image-post>
   </ul>
 </template>
