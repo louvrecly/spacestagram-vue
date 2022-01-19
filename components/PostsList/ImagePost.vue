@@ -15,7 +15,7 @@
         <like-button class="button" :liked="liked" @toggleLike="toggleLike"></like-button>
       </div>
 
-      <div class="body text-small">
+      <div class="body">
         <p class="explanation" :class="{ collapsed }" @click="toggleCollapsed">{{ explanation }}</p>
 
         <p v-if="copyright" class="copyright text-italic">&#169; {{ copyright }}</p>
@@ -74,19 +74,29 @@ export default {
 @import ~assets/css/utils/media
 
 .post
+  border-radius: 8px
+  box-shadow: 0 5px 10px rgba(#000, 0.3)
+  overflow: hidden
+  transition: transform .3s ease
+
+  &:hover
+    transform: scale(1.05)
+
   .wrapper
-    border-radius: 8px
-    overflow: hidden
+    display: flex
 
     .image
       width: 100%
 
   .container
     .header
-      padding: 20px 0
+      padding: 20px 20px 10px
       display: flex
       justify-content: space-between
       align-items: center
+
+      @media #{$tablets-up}
+        padding: 20px 30px 10px
 
       .info
         margin: 0 10px 0 0
@@ -103,7 +113,13 @@ export default {
           +font-size-smaller
 
     .body
+      padding: 10px 20px 20px
       color: rgba(gold, 0.6)
+      +font-size-smaller
+
+      @media #{$tablets-up}
+        +font-size-small
+        padding: 10px 30px 30px
 
       .explanation
         margin: 0 0 20px
