@@ -67,11 +67,11 @@ export default {
   transition: all .3s ease
 
   &.solid
-    background-image: $background-gradient
+    background-image: $background-gradient-light
     box-shadow: 0 5px 10px rgba(#000, 0.3)
 
     .container
-      padding: 5px 0 10px
+      padding: 0 0 5px
 
       @media #{$tablets-up}
         padding: 10px 0 15px
