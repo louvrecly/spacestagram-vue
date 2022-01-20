@@ -3,7 +3,11 @@
     <section class="container responsive-margins">
       <posts-list v-if="filteredPosts.length" :posts="filteredPosts"></posts-list>
 
-      <div v-else class="no-results">Oops... no posts seem to matched the filter criteria so far.</div>
+      <div v-else class="no-results">
+        <p class="message">Oops... no posts seem to matched the filter criteria so far.</p>
+
+        <button class="button text-button" @click="loadMorePosts">LOAD MORE POSTS</button>
+      </div>
     </section>
   </div>
 </template>
@@ -13,7 +17,7 @@ import { mapGetters } from 'vuex'
 
 import PostsList from '~/components/PostsList'
 
-import { validateStartDate } from '~/utils/nasaHelper'
+import { validateStartDate, getNextDateRange } from '~/utils/nasaHelper'
 
 export default {
   name: 'HomePage',
@@ -29,7 +33,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ posts: 'getPosts' }),
+    ...mapGetters({
+      posts: 'getPosts',
+      startDate: 'getStartDate'
+    }),
     queryParams () {
       return this.$route.query
     },
@@ -44,6 +51,10 @@ export default {
       return post => {
         return this.searchableFields.some(field => post[field] && post[field].toLowerCase().includes(search.toLowerCase()))
       }
+    },
+    async loadMorePosts () {
+      const { startDate, endDate } = getNextDateRange(this.startDate)
+      await this.$store.dispatch('loadPosts', startDate, endDate)
     }
   }
 }
@@ -66,13 +77,23 @@ export default {
 
     .no-results
       min-height: 500px
-      color: goldenrod
-      +font-size-small
-      text-align: center
+      // color: goldenrod
+      // +font-size-small
+      // text-align: center
       display: flex
+      flex-direction: column
       justify-content: center
       align-items: center
 
-      @media #{$tablets-up}
-        +font-size-normal
+      // @media #{$tablets-up}
+      //   +font-size-normal
+
+      .message
+        margin: 0 0 30px
+        color: goldenrod
+        +font-size-small
+        text-align: center
+
+        @media #{$tablets-up}
+          +font-size-normal
 </style>
