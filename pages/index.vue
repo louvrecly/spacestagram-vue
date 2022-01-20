@@ -4,13 +4,21 @@
       <div v-if="filteredPosts.length" class="results">
         <posts-list :posts="filteredPosts"></posts-list>
 
-        <button class="button text-button" @click="loadMorePosts">LOAD MORE POSTS</button>
+        <button class="button text-button" @click="loadMorePosts">
+          <spinner v-if="busy"></spinner>
+
+          <span v-else>LOAD MORE POSTS</span>
+        </button>
       </div>
 
       <div v-else class="no-results">
         <p class="message">Oops... no posts seem to matched the filter criteria so far.</p>
 
-        <button class="button text-button" @click="loadMorePosts">LOAD MORE POSTS</button>
+        <button class="button text-button" @click="loadMorePosts">
+          <spinner v-if="busy"></spinner>
+
+          <span v-else>LOAD MORE POSTS</span>
+        </button>
       </div>
     </section>
   </div>
@@ -19,13 +27,17 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import PostsList from '~/components/PostsList'
-
 import { validateDateRange, getNextDateRange } from '~/utils/nasaHelper'
+
+const PostsList = () => import('~/components/PostsList')
+const Spinner = () => import('~/components/Spinner')
 
 export default {
   name: 'HomePage',
-  components: { PostsList },
+  components: {
+    PostsList,
+    Spinner
+  },
   async asyncData ({ store, route: { query }, $config: { nasaApiKey } }) {
     const { start_date, end_date } = query // eslint-disable-line camelcase
     const { startDate, endDate } = validateDateRange({ startDate: start_date, endDate: end_date }) // eslint-disable-line camelcase
@@ -38,6 +50,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      busy: 'getBusyState',
       posts: 'getPosts',
       startDate: 'getStartDate'
     }),
@@ -83,7 +96,10 @@ export default {
     .results
       .button
         margin: 100px auto
+        width: 240px
+        height: 35px
         display: block
+        position: relative
 
     .no-results
       min-height: 500px
@@ -100,4 +116,9 @@ export default {
 
         @media #{$tablets-up}
           +font-size-normal
+
+      .button
+        width: 240px
+        height: 35px
+        position: relative
 </style>
