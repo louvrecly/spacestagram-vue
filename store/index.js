@@ -1,11 +1,13 @@
 export const state = () => ({
   posts: [],
-  startDate: null
+  startDate: null,
+  likedPostDates: []
 })
 
 export const getters = {
   getPosts: state => state.posts,
-  getStartDate: state => state.startDate
+  getStartDate: state => state.startDate,
+  getLikePostDates: state => state.likedPostDates
 }
 
 export const mutations = {
@@ -14,10 +16,23 @@ export const mutations = {
   },
   SET_START_DATE (state, startDate) {
     state.startDate = startDate
+  },
+  SET_LIKED_POST_DATES (state, likedPostDates) {
+    state.likedPostDates = likedPostDates
+  },
+  TOGGLE_LIKE_POST (state, { date, like }) {
+    const likedPostDates = like
+      ? [...state.likedPostDates, date]
+      : state.likedPostDates.filter(likedPostDate => likedPostDate !== date)
+    state.likedPostDates = likedPostDates
   }
 }
 
 export const actions = {
+  nuxtClientInit ({ commit }, { app }) {
+    const likedPostDates = app.$cookies.get('liked-post-dates')
+    if (likedPostDates) commit('SET_LIKED_POST_DATES', likedPostDates)
+  },
   async loadPosts ({ commit, state }, { startDate, endDate, nasaApiKey }) {
     const posts = await this.$axios.$get('/planetary/apod', {
       params: {
@@ -33,5 +48,11 @@ export const actions = {
     commit('SET_START_DATE', startDate)
     commit('SET_POSTS', sortedPosts)
     return sortedPosts
+  },
+  setLikePostDates ({ commit }, likedPostDates) {
+    commit('SET_LIKED_POST_DATES', likedPostDates)
+  },
+  toggleLikePost ({ commit }, { date, like }) {
+    commit('TOGGLE_LIKE_POST', { date, like })
   }
 }
