@@ -60,5 +60,8 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
+  publicRuntimeConfig: {
+    nasaApiKey: process.env.NASA_API_KEY || 'DEMO_KEY'
+  }
 }
