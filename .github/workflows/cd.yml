@@ -25,6 +25,9 @@ jobs:
 
       - name: Generate
         run: yarn generate
+        env:
+          NASA_API_URL: ${{ secrets.NASA_API_URL }}
+          NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
