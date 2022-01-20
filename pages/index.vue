@@ -1,7 +1,11 @@
 <template>
   <div class="home">
     <section class="container responsive-margins">
-      <posts-list v-if="filteredPosts.length" :posts="filteredPosts"></posts-list>
+      <div v-if="filteredPosts.length" class="results">
+        <posts-list :posts="filteredPosts"></posts-list>
+
+        <button class="button text-button" @click="loadMorePosts">LOAD MORE POSTS</button>
+      </div>
 
       <div v-else class="no-results">
         <p class="message">Oops... no posts seem to matched the filter criteria so far.</p>
@@ -75,6 +79,11 @@ export default {
 
     @media #{$tablets-up}
       padding: 160px 0
+
+    .results
+      .button
+        margin: 100px auto
+        display: block
 
     .no-results
       min-height: 500px
