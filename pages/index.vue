@@ -78,16 +78,10 @@ export default {
 
     .no-results
       min-height: 500px
-      // color: goldenrod
-      // +font-size-small
-      // text-align: center
       display: flex
       flex-direction: column
       justify-content: center
       align-items: center
-
-      // @media #{$tablets-up}
-      //   +font-size-normal
 
       .message
         margin: 0 0 30px
