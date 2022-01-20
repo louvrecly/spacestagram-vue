@@ -1,14 +1,14 @@
 <template>
   <div class="nav-bar" :class="{ solid: !isOnTop }">
     <modal-base v-if="modalOpened" @close="toggleModalOpened(false)">
-      <posts-filter></posts-filter>
+      <posts-filter @close="toggleModalOpened(false)"></posts-filter>
     </modal-base>
 
     <div class="container responsive-margins">
       <app-logo></app-logo>
 
-      <button class="button icon-button" @click="toggleModalOpened(true)">
-        <font-awesome-icon :icon="['fas', 'bars']"></font-awesome-icon>
+      <button class="button icon-button" :class="{ active: isFilterActive }" @click="toggleModalOpened(true)">
+        <font-awesome-icon :icon="['fas', 'filter']"></font-awesome-icon>
       </button>
     </div>
   </div>
@@ -34,6 +34,14 @@ export default {
     return {
       isOnTop: true,
       modalOpened: false
+    }
+  },
+  computed: {
+    queryParams () {
+      return this.$route.query
+    },
+    isFilterActive () {
+      return Object.keys(this.queryParams).length > 0
     }
   },
   methods: {
@@ -77,4 +85,8 @@ export default {
 
     @media #{$tablets-up}
       padding: 20px 0 25px
+
+    .button
+      &.active
+        color: springgreen
 </style>
