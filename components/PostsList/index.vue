@@ -35,10 +35,19 @@ export default {
 .posts-list
   color: gold
 
+  @media #{$medium-up}
+    display: flex
+    justify-content: space-between
+    flex-wrap: wrap
+
   .post
     &:not(:last-of-type)
       margin: 0 0 50px
 
       @media #{$tablets-up}
         margin: 0 0 100px
+
+      @media #{$medium-up}
+        width: 460px
+        height: fit-content
 </style>
