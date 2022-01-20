@@ -1,16 +1,21 @@
 export const state = () => ({
+  busy: false,
   posts: [],
   startDate: null,
   likedPostDates: []
 })
 
 export const getters = {
+  getBusyState: state => state.busy,
   getPosts: state => state.posts,
   getStartDate: state => state.startDate,
   getLikePostDates: state => state.likedPostDates
 }
 
 export const mutations = {
+  SET_BUSY_STATE (state, busy) {
+    state.busy = busy
+  },
   SET_POSTS (state, posts) {
     state.posts = posts
   },
@@ -34,6 +39,8 @@ export const actions = {
     if (likedPostDates) commit('SET_LIKED_POST_DATES', likedPostDates)
   },
   async loadPosts ({ commit, state }, { startDate, endDate, nasaApiKey }) {
+    commit('SET_BUSY_STATE', true)
+
     const posts = await this.$axios.$get('/planetary/apod', {
       params: {
         api_key: nasaApiKey,
@@ -47,6 +54,7 @@ export const actions = {
 
     commit('SET_START_DATE', startDate)
     commit('SET_POSTS', sortedPosts)
+    commit('SET_BUSY_STATE', false)
     return sortedPosts
   },
   setLikePostDates ({ commit }, likedPostDates) {
