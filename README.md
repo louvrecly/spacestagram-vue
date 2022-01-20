@@ -8,12 +8,13 @@ A deployed live demo is available here in this link:
 This is a project to create an image-sharing platform UI for visitors to browse one of the NASA's image APIs, [Astronomy Picture of the Day](https://api.nasa.gov/#apod).
 
 ### Functionalities
-- Like or unlike any photo of your choice
-- Browse through photos with search functions
-- Expand / collapse the explanation of the each post
-- Filter posts by search input from the button at the top-right corner
-- Filter query applied on url which enable users to share filter results
-- Device responsive UI
+- [x] Like or unlike any photo of your choice
+- [x] Browse through photos with search functions
+- [x] Expand / collapse the explanation of the each post
+- [x] Filter posts by search input from the button at the top-right corner
+- [x] Filter query applied on url which enable users to share filter results
+- [x] Cache liked posts and load likes on reload the page
+- [x] Device responsive UI
 
 ## Build Setup
 
