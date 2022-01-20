@@ -8,3 +8,9 @@ export function validateStartDate(startDate) {
     ? startDate
     : moment().subtract(defaultNumOfPosts, 'days').format('YYYY-MM-DD')
 }
+
+export function getNextDateRange (oldStartDate) {
+  const endDate = moment(oldStartDate).subtract(1, 'days').format('YYYY-MM-DD')
+  const startDate = moment(endDate).subtract(defaultNumOfPosts, 'days').format('YYYY-MM-DD')
+  return { startDate, endDate }
+}
