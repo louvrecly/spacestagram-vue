@@ -41,13 +41,13 @@ export default {
     flex-wrap: wrap
 
   .post
+    @media #{$medium-up}
+      width: 460px
+      height: fit-content
+
     &:not(:last-of-type)
       margin: 0 0 50px
 
       @media #{$tablets-up}
         margin: 0 0 100px
-
-      @media #{$medium-up}
-        width: 460px
-        height: fit-content
 </style>
