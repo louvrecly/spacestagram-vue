@@ -1,7 +1,7 @@
 <template>
   <div class="nav-bar" :class="{ solid: !isOnTop }">
     <modal-base v-if="modalOpened" @close="toggleModalOpened(false)">
-      filter
+      <posts-filter></posts-filter>
     </modal-base>
 
     <div class="container responsive-margins">
@@ -20,12 +20,14 @@ import AppLogo from './Logo'
 import scrollHandler from '~/components/mixins/scrollHandler'
 
 const ModalBase = () => import('~/components/ModalBase')
+const PostsFilter = () => import('./PostsFilter')
 
 export default {
   name: 'NavBar',
   components: {
     AppLogo,
-    ModalBase
+    ModalBase,
+    PostsFilter
   },
   mixins: [scrollHandler],
   data () {
