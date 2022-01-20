@@ -23,6 +23,14 @@ export default {
       }
     }
   },
+  computed: {
+    queryParams () {
+      return this.$route.query
+    }
+  },
+  created () {
+    if (this.queryParams.search) this.query.search = this.queryParams.search
+  },
   methods: {
     submitQuery () {
       const query = Object.keys(this.query).reduce((subquery, key) => {
@@ -34,6 +42,7 @@ export default {
       const route = { name: 'index', query }
 
       this.$router.push(route)
+      this.$emit('close')
     }
   }
 }
