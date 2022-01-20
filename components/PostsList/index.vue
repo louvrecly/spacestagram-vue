@@ -4,17 +4,21 @@
       v-for="(post, idx) in posts"
       :key="idx"
       class="post"
+      :date="post.date"
       :url="post.url"
       :media-type="post.media_type"
       :title="post.title"
-      :date="post.date"
       :explanation="post.explanation"
       :copyright="post.copyright"
+      :liked="isPostLiked(post.date)"
+      @toggleLikePost="toggleLikePost"
     ></image-post>
   </ul>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import ImagePost from './ImagePost'
 
 export default {
@@ -24,6 +28,18 @@ export default {
     posts: {
       type: Array,
       default: () => []
+    }
+  },
+  computed: {
+    ...mapGetters({ likedPostDates: 'getLikePostDates' })
+  },
+  methods: {
+    isPostLiked (date) {
+      return this.likedPostDates.includes(date)
+    },
+    toggleLikePost ({ date, like }) {
+      this.$store.dispatch('toggleLikePost', { date, like })
+      this.$cookies.set('liked-post-dates', this.likedPostDates)
     }
   }
 }

@@ -36,6 +36,10 @@ export default {
   name: 'ImagePost',
   components: { LikeButton },
   props: {
+    date: {
+      type: String,
+      required: true
+    },
     url: {
       type: String,
       required: true
@@ -48,10 +52,6 @@ export default {
       type: String,
       default: 'Missing Title'
     },
-    date: {
-      type: String,
-      default: 'Date Unknown'
-    },
     explanation: {
       type: String,
       default: 'Missing Explanation'
@@ -59,11 +59,14 @@ export default {
     copyright: {
       type: String,
       default: ''
+    },
+    liked: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      liked: false,
       collapsed: true
     }
   },
@@ -89,7 +92,7 @@ export default {
       }
     },
     toggleLike (like) {
-      this.liked = !like
+      this.$emit('toggleLikePost', { date: this.date, like: !like })
     },
     toggleCollapsed () {
       this.collapsed = !this.collapsed
