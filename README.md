@@ -1,4 +1,4 @@
-# spacestagram-vue
+# 🪐 spacestagram-vue
 
 ## Deployed Version on GitHub Pages
 A deployed live demo is available here in this link:
